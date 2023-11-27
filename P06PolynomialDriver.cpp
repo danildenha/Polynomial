@@ -1,6 +1,3 @@
-//Danil Denha
-//CS318
-//Project 6
 //This project uses the concept of a single-variable polynomial, p(x), of degree n over a numeric type
 
 #include <iostream>
