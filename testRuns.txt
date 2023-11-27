@@ -1,0 +1,69 @@
+
+*** P07 Polynomial Driver Sample Run ***
+
+LINE 15 * Entry for p1: 1 2 3 4 5 6 0 =>  1 2 3 4 5 6 0
+p1:
+Number terms 3
+5x^6 + 3x^4 + x^2
+
+LINE 20 * Entry for p2: 1 2 3 4 5 6 0 =>  1 2 3 4 5 6 0
+p2:
+Number terms 3
+5x^6 + 3x^4 + x^2
+
+LINE 25 * (p1 == p2) *: true
+
+LINE 28 * p1 += p2 *:
+Number terms 3
+10x^6 + 6x^4 + 2x^2
+
+LINE 32 * p1 -= p2 *:
+Number terms 3
+5x^6 + 3x^4 + x^2
+
+LINE 36 * p1 = mono(-10, 7) *:
+Number terms 1
+-10x^7
+
+LINE 40 * p1 -= mono(-10, 7) *:
+Number terms 0
+
+
+LINE 44 * p1 += mono(-10, 7) *:
+Number terms 1
+-10x^7
+
+LINE 48 * p1 = poly(mono(-10, 7)) - poly(mono(-10,7)) + poly(mono(-10,7)) *:
+Number terms 1
+-10x^7
+
+LINE 53 * Entry for p3: 1 2 5 1 1 0 0 =>  1 2 5 1 1 0 0
+p3:
+Number terms 3
+x^2 + 5x + 1
+
+LINE 57 * Entry for p4: 3 2 -10 1 15 0 0 =>  3 2 -10 1 15 0 0
+p4:
+Number terms 3
+3x^2 - 10x + 15
+
+LINE 62 * p3 *= p4 *:
+Number terms 3
+3x^4 + 5x^3 - 32x^2 + 65x + 15
+
+LINE 64 * (p3 == p4) *: false
+
+LINE 67 * p5 = move(p2) *:
+Number terms 3
+5x^6 + 3x^4 + x^2
+
+LINE 71 * Entry for p6: 1 2 -3 4 -1 6 0 =>   1 2 -3 4 -1 6 0
+p6:
+Number terms 3
+-x^6 - 3x^4 + x^2
+
+LINE 76 * result = p6.evaluate(2) *: -108
+
+\\elm-xa-file\CitrixFiles$\elmhurst\e0752120\Desktop\P06318Denha\x64\Debug\P06318Denha.exe (process 33496) exited with code 0.
+To automatically close the console when debugging stops, enable Tools->Options->Debugging->Automatically close the console when debugging stops.
+Press any key to close this window . . .
