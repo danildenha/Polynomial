@@ -3,10 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# Ignore Visual Studio project and solution files
-*P06318Denha.vcxproj
-*P06318Denha.vcxproj.filters
-*P06318Denha.sln
 
 
 # User-specific files
