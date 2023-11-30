@@ -1,3 +1,4 @@
+// Polynomial.h -- starter code
 #ifndef __POLYNOMIAL_H_
 #define __POLYNOMIAL_H_
 #include <iostream>
@@ -7,6 +8,7 @@ using namespace std;
 
 ///////////////////////////////////////////////////////// Monomial Class
 // Monomial - class that creates the terms that get inserted in a Polynomial
+//	-- DO NOT MODIFY
 template <typename NumT>
 class Monomial {
 public:
@@ -24,15 +26,16 @@ public:
 		return (coeff != m.coeff || expo != m.expo);
 	}
 private:
-	NumT coeff;
+	NumT coeff; // in our case this will be an int
 	int	expo;
 };
 
-//Polynomial Class
+//////////////////////////////////////////////////////Polynomial Class
 template <typename NumberType>
 class Polynomial
 {
 public:
+	// Default constructor -- DO NOT MODIFY
 	Polynomial<NumberType>(NumberType c = 0, int d = 0) {
 		const Monomial<NumberType> m(c, d);
 		term_list.push_back(m); //creates at least one monomial
@@ -40,17 +43,17 @@ public:
 		highest_degree = d;
 	}
 
-	// Type conversion construct
+	// Type conversion construct -- DO NOT MODIFY
 	Polynomial<NumberType>(const Monomial<NumberType>& m) {
 		term_list.push_back(m);
 		number_of_terms = 1;
 		highest_degree = m.degree();
 	}
 
-	// Destructor - uses default destructors and list's destructor
+	// Destructor - use default destructors and list's destructor -- DO NOT MODIFY
 	~Polynomial<NumberType>() { term_list.clear(); }
 
-	// Copy Constructor
+	// Copy Constructor -- DO NOT MODIFY
 	Polynomial<NumberType>(const Polynomial<NumberType>& rhs)
 		: term_list(rhs.term_list),
 		number_of_terms(rhs.number_of_terms),
@@ -67,21 +70,20 @@ public:
 		return *this;
 	}
 
+	// move assignment
 	const Polynomial<NumberType>& operator=(Polynomial<NumberType>&& rhs)
 	{
 		if (this != &rhs)
 		{
-			//clearing current obeject's data to prevent memory leaks
-			term_list.clear();
-			number_of_terms = 0;
-			highest_degree = 0;
+			*this = rhs;
 
-			this->term_list = move(rhs.term_list);
-			this->number_of_terms = move(rhs.number_of_terms);
-			this->highest_degree = move(rhs.highest_degree);
+			// Clear source data to prevent memory leaks
+			rhs.term_list.clear();
+			rhs.number_of_terms = 0;
+			rhs.highest_degree = 0;
 		}
 		return *this;
-	}// move assignment
+	}
 
 	// ADDITION
 	Polynomial<NumberType> operator+=(const Monomial<NumberType>& m)
@@ -94,7 +96,7 @@ public:
 	{
 		for (const auto x : rhs.term_list)
 		{
-			*this += x;
+			insert_in_poly(*this, x);
 		}
 		return *this;
 	}
@@ -132,8 +134,7 @@ public:
 		}
 		else
 		{
-			term_list.emplace_back(-m.coefficient(), m.degree());
-			term_list.sort([](const auto& x, const auto& y) { return x.degree() > y.degree(); });
+			insert_in_poly(*this, Monomial<NumberType>(-m.coefficient(), m.degree()));
 		}
 		return *this;
 	}
@@ -171,36 +172,20 @@ public:
 	}
 	Polynomial<NumberType> operator*=(const Polynomial<NumberType>& rhs)
 	{
-		list<Monomial<NumberType>> resultTerms;
+		Polynomial<NumberType> result(*this);
 
-		for (auto curr1 : term_list)
+		for (auto& term1 : term_list)
 		{
-			for (auto curr2 : rhs.term_list)
+			for (auto& term2 : rhs.term_list)
 			{
-				NumberType newCoeff = curr1.coefficient() * curr2.coefficient();
-				int newDegr = curr1.degree() + curr2.degree();
+				NumberType newCoeff = term1.coefficient() * term2.coefficient();
+				int newDegree = term1.degree() + term2.degree();
+				Monomial<NumberType> temp(newCoeff, newDegree);
 
-				auto it = std::find_if(resultTerms.begin(), resultTerms.end(),
-					[newDegr](const Monomial<NumberType>& term) {
-						return term.degree() == newDegr;
-					});
-
-				if (it != resultTerms.end())
-				{
-					it->assign_coefficient(it->coefficient() + newCoeff);
-				}
-				else
-				{
-					resultTerms.push_back(Monomial<NumberType>(newCoeff, newDegr));
-				}
+				insert_in_poly(result, temp);
 			}
 		}
-
-		term_list = resultTerms;
-		term_list.sort([](const auto& x, const auto& y) { return x.degree() > y.degree(); });
-
-		highest_degree = term_list.empty() ? 0 : term_list.front().degree();
-
+		*this = result;
 		return *this;
 	}
 	const Polynomial<NumberType> operator*(const Monomial<NumberType>& m) const
@@ -268,34 +253,39 @@ public:
 		}
 	}
 
-	// print() function
+	// print() function -- make sure you look back at requirements for this
 	void print(ostream& out = cout) const
 	{
 		out << "\nNumber terms " << number_of_terms << endl;
 		for (auto it = term_list.begin(); it != term_list.end(); ++it) {
-			if (it != term_list.begin() && it->coefficient() > 0)
+			//variables to improve readability
+			bool beginning = it != term_list.begin();
+			NumberType currCoeff = it->coefficient();
+			int currDegree = it->degree();
+
+			if (beginning && currCoeff > 0)
 			{
 				out << " + ";
 			}
-			else if (it != term_list.begin())
+			else if (beginning)
 			{
 				out << " - ";
 			}
-			else if (it->coefficient() < 0)
+			else if (currCoeff < 0)
 			{
 				out << "-";
 			}
 
-			if (abs(it->coefficient()) != 1 || it->degree() == 0) 
+			if (abs(currCoeff) != 1 || currDegree == 0)
 			{
-				out << abs(it->coefficient());
+				out << abs(currCoeff);
 			}
 
-			if (it->degree() > 0) 
+			if (currDegree > 0)
 			{
 				out << "x";
-				if (it->degree() > 1) {
-					out << "^" << it->degree();
+				if (currDegree > 1) {
+					out << "^" << currDegree;
 				}
 			}
 		}
@@ -307,7 +297,7 @@ private:
 	int number_of_terms;
 	int highest_degree;
 
-	//private helper member function
+	//private helper member function -- review notes below function prototype
 	void insert_in_poly(Polynomial<NumberType>& p, const Monomial<NumberType>& m)
 	{
 		auto it = find_if(p.term_list.begin(), p.term_list.end(),
@@ -334,12 +324,14 @@ private:
 	}
 };
 
+// DO NOT MODIFY
 template<typename NumberType>
 istream& operator>>(istream& in, Polynomial<NumberType>& rhs) {
 	rhs.read();
 	return in;
 }
 
+// DO NOT MODIFY
 template<typename NumberType>
 ostream& operator<<(ostream& out, const  Polynomial<NumberType>& rhs) {
 	rhs.print();
