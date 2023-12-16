@@ -6,6 +6,10 @@
 
 - **Objective:** This project involves designing and implementing a Polynomial class in C++ to handle single-variable polynomials of degree 'n' over a specified numeric type (NumType). The implementation focuses on efficiency using linked lists of monomials.
 
+  **See the picture that explains what is Polynomial**
+
+  ![Polynomial Picture](https://media.geeksforgeeks.org/wp-content/uploads/20230713114538/Polynomial-(2).png)
+
 #### Project Components:
 
 - **Polynomial.h:** Contains the implementation of the Polynomial and Monomial classes using templates. The Polynomial class manages linked lists of Monomials and performs various polynomial operations.
