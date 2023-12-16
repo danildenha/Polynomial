@@ -10,7 +10,7 @@
 
 - **Polynomial.h:** Contains the implementation of the Polynomial and Monomial classes using templates. The Polynomial class manages linked lists of Monomials and performs various polynomial operations.
 
-- **P06PolynomialDriver.cpp:** This file serves as a driver program to test the functionalities of the implemented Polynomial class. It includes tests for input formats and function calls.
+- **PolynomialTestDriver.cpp:** This file serves as a driver program to test the functionalities of the implemented Polynomial class. It includes tests for input formats and function calls.
 
 #### Implementation Approach:
 
