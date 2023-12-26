@@ -323,14 +323,12 @@ private:
 	}
 };
 
-// DO NOT MODIFY
 template<typename NumberType>
 istream& operator>>(istream& in, Polynomial<NumberType>& rhs) {
 	rhs.read();
 	return in;
 }
 
-// DO NOT MODIFY
 template<typename NumberType>
 ostream& operator<<(ostream& out, const  Polynomial<NumberType>& rhs) {
 	rhs.print();
