@@ -29,12 +29,12 @@ private:
 	int	expo;
 };
 
-//////////////////////////////////////////////////////Polynomial Class
+//Polynomial Class
 template <typename NumberType>
 class Polynomial
 {
 public:
-	// Default constructor -- DO NOT MODIFY
+	// Default constructor
 	Polynomial<NumberType>(NumberType c = 0, int d = 0) {
 		const Monomial<NumberType> m(c, d);
 		term_list.push_back(m); //creates at least one monomial
@@ -42,14 +42,14 @@ public:
 		highest_degree = d;
 	}
 
-	// Type conversion construct -- DO NOT MODIFY
+	// Type conversion construct
 	Polynomial<NumberType>(const Monomial<NumberType>& m) {
 		term_list.push_back(m);
 		number_of_terms = 1;
 		highest_degree = m.degree();
 	}
 
-	// Destructor - use default destructors and list's destructor -- DO NOT MODIFY
+	// Destructor - use default destructors and list's destructor
 	~Polynomial<NumberType>() { term_list.clear(); }
 
 	// Copy Constructor -- DO NOT MODIFY
