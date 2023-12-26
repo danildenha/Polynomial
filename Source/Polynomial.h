@@ -296,7 +296,7 @@ private:
 	int number_of_terms;
 	int highest_degree;
 
-	//private helper member function -- review notes below function prototype
+	//private helper member function that inserts monomials in polynomial
 	void insert_in_poly(Polynomial<NumberType>& p, const Monomial<NumberType>& m)
 	{
 		auto it = find_if(p.term_list.begin(), p.term_list.end(),
