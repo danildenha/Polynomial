@@ -1,4 +1,5 @@
 //This project uses the concept of a single-variable polynomial, p(x), of degree n over a numeric type
+//This run file is FOR TESTING ONLY
 
 #include <iostream>
 #include <list>
