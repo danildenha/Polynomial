@@ -252,7 +252,7 @@ public:
 		}
 	}
 
-	// print() function -- make sure you look back at requirements for this
+	// output function
 	void print(ostream& out = cout) const
 	{
 		out << "\nNumber terms " << number_of_terms << endl;
