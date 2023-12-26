@@ -1,4 +1,5 @@
 // Polynomial.h -- starter code
+
 #ifndef __POLYNOMIAL_H_
 #define __POLYNOMIAL_H_
 #include <iostream>
@@ -6,7 +7,6 @@
 #include <cmath>
 using namespace std;
 
-///////////////////////////////////////////////////////// Monomial Class
 // Monomial - class that creates the terms that get inserted in a Polynomial
 template <typename NumT>
 class Monomial {
