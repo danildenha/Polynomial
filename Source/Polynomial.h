@@ -52,7 +52,7 @@ public:
 	// Destructor - use default destructors and list's destructor
 	~Polynomial<NumberType>() { term_list.clear(); }
 
-	// Copy Constructor -- DO NOT MODIFY
+	// Copy Constructor
 	Polynomial<NumberType>(const Polynomial<NumberType>& rhs)
 		: term_list(rhs.term_list),
 		number_of_terms(rhs.number_of_terms),
@@ -84,7 +84,7 @@ public:
 		return *this;
 	}
 
-	// ADDITION
+	// addition of different types
 	Polynomial<NumberType> operator+=(const Monomial<NumberType>& m)
 	{
 		insert_in_poly(*this, m);
@@ -115,7 +115,7 @@ public:
 	}
 	//4
 
-	// SUBTRACTION
+	// substraction of different types
 	Polynomial<NumberType> operator-=(const Monomial<NumberType>& m)
 	{
 		auto it = find_if(term_list.begin(), term_list.end(),
