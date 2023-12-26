@@ -8,7 +8,6 @@ using namespace std;
 
 ///////////////////////////////////////////////////////// Monomial Class
 // Monomial - class that creates the terms that get inserted in a Polynomial
-//	-- DO NOT MODIFY
 template <typename NumT>
 class Monomial {
 public:
